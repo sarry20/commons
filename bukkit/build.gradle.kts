@@ -1,8 +1,7 @@
-repositories {
-    maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
-    maven("https://oss.sonatype.org/content/repositories/snapshots/")
+plugins {
+    id("io.papermc.paperweight.userdev") version "1.7.1"
 }
 
 dependencies {
-    compileOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT")
+    paperweight.paperDevBundle("1.20.6-R0.1-SNAPSHOT")
 }

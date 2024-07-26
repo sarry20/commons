@@ -6,21 +6,17 @@ import java.util.regex.Pattern;
 
 public class ServerVersion {
 
-    public static final String VERSION_STRING = Bukkit.getServer()
-            .getClass()
-            .getName()
-            .split(Pattern.quote("."))[3];
+    public static final String VERSION_STRING = Bukkit.getBukkitVersion()
+            .split(Pattern.quote("-"))[0];
 
     public static final ServerVersion CURRENT = getVersionOfString(VERSION_STRING);
 
     private final byte major;
     private final byte minor;
-    private final byte patch;
 
-    public ServerVersion(byte major, byte minor, byte patch) {
+    public ServerVersion(byte major, byte minor) {
         this.major = major;
         this.minor = minor;
-        this.patch = patch;
     }
 
     public byte getMajor() {
@@ -31,13 +27,9 @@ public class ServerVersion {
         return minor;
     }
 
-    public byte getPatch() {
-        return patch;
-    }
-
     @Override
     public String toString() {
-        return "v" + major + '_' + minor + "_R" + patch;
+        return "v" + major + '_' + minor + "_R";
     }
 
     /**
@@ -48,11 +40,10 @@ public class ServerVersion {
      *                               are not bytes
      */
     public static ServerVersion getVersionOfString(String versionString) {
-        String[] args = versionString.split(Pattern.quote("_"));
+        String[] args = versionString.split(Pattern.quote("."));
         byte major = Byte.parseByte(args[0].substring(1));
         byte minor = Byte.parseByte(args[1]);
-        byte patch = Byte.parseByte(args[2].substring(1));
-        return new ServerVersion(major, minor, patch);
+        return new ServerVersion(major, minor);
     }
 
 }
